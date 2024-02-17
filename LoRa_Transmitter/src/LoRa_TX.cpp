@@ -160,156 +160,156 @@ sendMessage(outMsg);
 }
 
 //--------------------------------------------LoRa Node-----------------------------------
-/*
+// 
 
-void LoRa_rxMode(){
-  LoRa.disableInvertIQ();               // normal mode
-  LoRa.receive();                       // set receive mode
-}
+// void LoRa_rxMode(){
+//   LoRa.disableInvertIQ();               // normal mode
+//   LoRa.receive();                       // set receive mode
+// }
 
-void LoRa_txMode(){
-  LoRa.idle();                          // set standby mode
-  LoRa.enableInvertIQ();                // active invert I and Q signals
-}
+// void LoRa_txMode(){
+//   LoRa.idle();                          // set standby mode
+//   LoRa.enableInvertIQ();                // active invert I and Q signals
+// }
 
-void LoRa_sendMessage(String message) {
-  LoRa_txMode();                        // set tx mode
-  LoRa.beginPacket();                   // start packet
-  LoRa.print(message);                  // add payload
-  LoRa.endPacket(true);                 // finish packet and send it
-}
+// void LoRa_sendMessage(String message) {
+//   LoRa_txMode();                        // set tx mode
+//   LoRa.beginPacket();                   // start packet
+//   LoRa.print(message);                  // add payload
+//   LoRa.endPacket(true);                 // finish packet and send it
+// }
 
-void onReceive(int packetSize) {
-  String message = "";
+// void onReceive(int packetSize) {
+//   String message = "";
 
-  while (LoRa.available()) {
-    message += (char)LoRa.read();
-  }
+//   while (LoRa.available()) {
+//     message += (char)LoRa.read();
+//   }
 
-  Serial.print("Gateway Receive: ");
-  Serial.println(message);
-}
+//   Serial.print("Gateway Receive: ");
+//   Serial.println(message);
+// }
 
-void onTxDone() {
-  Serial.println("Truyen hoan tat");
-  LoRa_rxMode();
-}
+// void onTxDone() {
+//   Serial.println("Truyen hoan tat");
+//   LoRa_rxMode();
+// }
 
-boolean runEvery(unsigned long interval)
-{
-  static unsigned long previousMillis = 0;
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval)
-  {
-    previousMillis = currentMillis;
-    return true;
-  }
-  return false;
-}
+// boolean runEvery(unsigned long interval)
+// {
+//   static unsigned long previousMillis = 0;
+//   unsigned long currentMillis = millis();
+//   if (currentMillis - previousMillis >= interval)
+//   {
+//     previousMillis = currentMillis;
+//     return true;
+//   }
+//   return false;
+// }
 
-void setup() 
-{
-  Serial.begin(115200); 
-  while (!Serial);
-  Serial.println("LoRa TX");
+// void setup() 
+// {
+//   Serial.begin(115200); 
+//   while (!Serial);
+//   Serial.println("LoRa TX");
  
-  LoRa.setPins(ss, rst , dio0);    //setup pins module LoRa 
+//   LoRa.setPins(ss, rst , dio0);    //setup pins module LoRa 
   
-  while (!LoRa.begin(433E6))     //433E6 - Asia, 866E6 - Europe, 915E6 - North America
-  {
-    Serial.println("Connecting.....");
-    delay(500);
-  }
-  LoRa.setSyncWord(0xA5);
+//   while (!LoRa.begin(433E6))     //433E6 - Asia, 866E6 - Europe, 915E6 - North America
+//   {
+//     Serial.println("Connecting.....");
+//     delay(500);
+//   }
+//   LoRa.setSyncWord(0xA5);
 
-  LoRa.onReceive(onReceive);
-  LoRa.onTxDone(onTxDone);
-  LoRa_rxMode();
-}
+//   LoRa.onReceive(onReceive);
+//   LoRa.onTxDone(onTxDone);
+//   LoRa_rxMode();
+// }
  
-void loop() {
-  if (runEvery(5000)) { // repeat every 5000 millis
+// void loop() {
+//   if (runEvery(5000)) { // repeat every 5000 millis
 
-    String message = "HeLoRa! ";
-    message += "I'm machdo! ";
-    // message += millis();
+//     String message = "HeLoRa! ";
+//     message += "I'm machdo! ";
+//     // message += millis();
 
-    LoRa_sendMessage(message); // send a message
+//     LoRa_sendMessage(message); // send a message
 
-    Serial.println("Send Message!");
-  }
-}
+//     Serial.println("Send Message!");
+//   }
+// }
 
-*/
-// ------------------------------------------------------------
+// */
+// // ------------------------------------------------------------
 
-//int counter = 0;
+// //int counter = 0;
 
- /*
-void setup() 
-{
-  Serial.begin(115200); 
-  while (!Serial);
-  Serial.println("LoRa TX");
+//  /*
+// void setup() 
+// {
+//   Serial.begin(115200); 
+//   while (!Serial);
+//   Serial.println("LoRa TX");
  
-  LoRa.setPins(ss, rst , dio0);    //setup pins module LoRa 
+//   LoRa.setPins(ss, rst , dio0);    //setup pins module LoRa 
   
-  while (!LoRa.begin(433E6))     //433E6 - Asia, 866E6 - Europe, 915E6 - North America
-  {
-    Serial.println("Connecting.....");
-    delay(500);
-  }
-  LoRa.setSyncWord(0xA5);
-  Serial.println("LoRa Initializing OK!");
-}
+//   while (!LoRa.begin(433E6))     //433E6 - Asia, 866E6 - Europe, 915E6 - North America
+//   {
+//     Serial.println("Connecting.....");
+//     delay(500);
+//   }
+//   LoRa.setSyncWord(0xA5);
+//   Serial.println("LoRa Initializing OK!");
+// }
  
-void loop() 
-{
-  int i = 0;
-  while(i < 1)
-  {
-    LoRa.receive();
-    i++;
-  }
-  int packetSize = LoRa.parsePacket();
-  if(packetSize) { 
-    Serial.print("Connect success!");
-    Serial.print("Sending packet: ");
-    // Serial.println(counter);
+// void loop() 
+// {
+//   int i = 0;
+//   while(i < 1)
+//   {
+//     LoRa.receive();
+//     i++;
+//   }
+//   int packetSize = LoRa.parsePacket();
+//   if(packetSize) { 
+//     Serial.print("Connect success!");
+//     Serial.print("Sending packet: ");
+//     // Serial.println(counter);
  
-    // LoRa.beginPacket();   //Send LoRa packet to receiver
-    // LoRa.print("hello ");
-    // LoRa.print(counter);
-    // LoRa.endPacket();
-    // counter++;
-    // delay(100);
-  }
-  LoRa.beginPacket();   //Send LoRa packet to receiver
-  LoRa.print("hello ");
-  LoRa.print(counter);
-  LoRa.endPacket();
-  counter++;
-  delay(100);
-}
- /*
-   if(RF_requestData == true){
-    digitalWrite(PIN_NUM_5V_CTRL, HIGH);
-    digitalWrite(PIN_NUM_12V_CTRL, HIGH);
-    device_getData();
-    device_dataManagement();
-    digitalWrite(PIN_NUM_5V_CTRL, LOW);
-    digitalWrite(PIN_NUM_12V_CTRL, LOW);
-    RF_requestData = false;
-    device_previousDataControl = millis();
-  } 
-  else if(millis() - device_previousDataControl >= DEVICE_DATA_SAVE_INTERVAL){
-    digitalWrite(PIN_NUM_5V_CTRL, HIGH);
-    digitalWrite(PIN_NUM_12V_CTRL, HIGH);
-    device_getData();
-    device_dataManagement();
-    digitalWrite(PIN_NUM_5V_CTRL, LOW);
-    digitalWrite(PIN_NUM_12V_CTRL, LOW);
-    device_previousDataControl = millis();
-  }
+//     // LoRa.beginPacket();   //Send LoRa packet to receiver
+//     // LoRa.print("hello ");
+//     // LoRa.print(counter);
+//     // LoRa.endPacket();
+//     // counter++;
+//     // delay(100);
+//   }
+//   LoRa.beginPacket();   //Send LoRa packet to receiver
+//   LoRa.print("hello ");
+//   LoRa.print(counter);
+//   LoRa.endPacket();
+//   counter++;
+//   delay(100);
+// }
+//  /*
+//    if(RF_requestData == true){
+//     digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+//     digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+//     device_getData();
+//     device_dataManagement();
+//     digitalWrite(PIN_NUM_5V_CTRL, LOW);
+//     digitalWrite(PIN_NUM_12V_CTRL, LOW);
+//     RF_requestData = false;
+//     device_previousDataControl = millis();
+//   } 
+//   else if(millis() - device_previousDataControl >= DEVICE_DATA_SAVE_INTERVAL){
+//     digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+//     digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+//     device_getData();
+//     device_dataManagement();
+//     digitalWrite(PIN_NUM_5V_CTRL, LOW);
+//     digitalWrite(PIN_NUM_12V_CTRL, LOW);
+//     device_previousDataControl = millis();
+//   }
 
- */
+//
