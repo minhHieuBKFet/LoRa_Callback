@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "arduino.h": "c",
+        "spi.h": "c",
+        "lora.h": "c"
+    }
+}

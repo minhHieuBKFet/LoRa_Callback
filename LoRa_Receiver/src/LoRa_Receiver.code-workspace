@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "LoRa_Receiver",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"arduino.h": "c",
+			"spi.h": "c",
+			"lora.h": "c"
+		}
+	}
+}
